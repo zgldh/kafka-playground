@@ -18,6 +18,7 @@ services:
     ports:
       - $KAFKA_INTERNET_PORT:9093
     environment:
+      KAFKA_BROKER_ID: 1
       KAFKA_CREATE_TOPICS: "${KAFKA_DEFAULT_TOPIC}:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENERS: PLAINTEXT://:9092,SSL://:9093
@@ -30,6 +31,8 @@ services:
       KAFKA_SSL_CLIENT_AUTH: required
       KAFKA_SSL_ENABLED_PROTOCOLS: TLSv1.2,TLSv1.1,TLSv1
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
+    depends_on: 
+      - zookeeper
     networks:
       - backend
     volumes:
