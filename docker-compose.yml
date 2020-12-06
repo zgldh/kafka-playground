@@ -46,4 +46,4 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - ${KAFKA_MANAGER_PASSWORD}:9000
+      - ${KAFKA_MANAGER_PORT}:9000
