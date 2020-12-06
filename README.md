@@ -14,7 +14,8 @@ A single broker Kafka SSL setup for learning or testing.
     | KAFKA_MANAGER_PORT     | The Kafka manager port.                            | 9000            |
     | KAFKA_DEFAULT_TOPIC    | The Kafka broker will initialized with this topic. | default         |
 
-2. Genreate CA and Key pairs into Keystores.
+2. Genreate CA and Key pairs into Keystores.  
+   Need `openssl` and `keytool`  
     ```bash
     ./setup_ssl_for_servers.sh
     ```
