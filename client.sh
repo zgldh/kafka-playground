@@ -8,6 +8,7 @@ docker run -it --rm \
     -v $WORKDIR/commands/consumer.sh:/usr/bin/consumer.sh \
     -v $WORKDIR/commands/producer.sh:/usr/bin/producer.sh \
     -v $WORKDIR/commands/client-entrypoint.sh:/usr/bin/client-entrypoint.sh \
+    --net host \
     --env-file .env \
     --entrypoint client-entrypoint.sh \
     wurstmeister/kafka
