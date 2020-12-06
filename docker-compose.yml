@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    networks:
+      - backend
+    expose:
+      - 2181
+  
+  kafka:
+    image: wurstmeister/kafka:2.13-2.6.0
+    ports:
+      - $KAFKA_INTERNET_PORT:9093
+    environment:
+      KAFKA_CREATE_TOPICS: "${KAFKA_DEFAULT_TOPIC}:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://:9092,SSL://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092,SSL://$KAFKA_INTERNET_HOST:$KAFKA_INTERNET_PORT
+      KAFKA_SSL_KEYSTORE_LOCATION: /certificates/kafka.keystore
+      KAFKA_SSL_KEYSTORE_PASSWORD: $KAFKA_SSL_KEY_PASSWORD
+      KAFKA_SSL_KEY_PASSWORD: $KAFKA_SSL_KEY_PASSWORD
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /certificates/kafka.truststore
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: $KAFKA_SSL_KEY_PASSWORD
+      KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_SSL_ENABLED_PROTOCOLS: TLSv1.2,TLSv1.1,TLSv1
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
+    networks:
+      - backend
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./certificates:/certificates
+
+  manager:
+    image: sheepkiller/kafka-manager:stable
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      APPLICATION_SECRET: LetMeIn
+    networks:
+      - backend
+    depends_on:
+      - zookeeper
+    ports:
+      - ${KAFKA_MANAGER_PASSWORD}:9000
