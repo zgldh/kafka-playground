@@ -35,7 +35,7 @@ keytool -keystore "$TRUST_STORE" -alias CARoot -import -file "$CERT_AUTH_FILE" \
 
 echo "4. 从key store中导出集群证书......"
 keytool -keystore "$KEY_STORE" -alias "$CLUSTER_NAME" -certreq -file "$CLUSTER_CERT_FILE" \
--storepass "$STORE_PASSWORD" -keypass "$KEY_PASSWORD" -noprompt -storetype pkcs12
+-storepass "$STORE_PASSWORD" -keypass "$KEY_PASSWORD" -noprompt
 
 echo "5. 签发证书......"
 openssl x509 -req -CA "$CERT_AUTH_FILE" -CAkey $CERT_OUTPUT_PATH/ca-key -in "$CLUSTER_CERT_FILE" \
@@ -43,8 +43,8 @@ openssl x509 -req -CA "$CERT_AUTH_FILE" -CAkey $CERT_OUTPUT_PATH/ca-key -in "$CL
 
 echo "6. 导入CA文件到keystore......"
 keytool -keystore "$KEY_STORE" -alias CARoot -import -file "$CERT_AUTH_FILE" \
--storepass "$STORE_PASSWORD" -keypass "$KEY_PASSWORD" -noprompt -storetype pkcs12
+-storepass "$STORE_PASSWORD" -keypass "$KEY_PASSWORD" -noprompt
 
 echo "7. 导入已签发证书到keystore......"
 keytool -keystore "$KEY_STORE" -alias "${CLUSTER_NAME}" -import -file "${CLUSTER_CERT_FILE}-signed" \
--storepass "$STORE_PASSWORD" -keypass "$KEY_PASSWORD" -noprompt -storetype pkcs12
+-storepass "$STORE_PASSWORD" -keypass "$KEY_PASSWORD" -noprompt

@@ -31,11 +31,11 @@ A single broker Kafka SSL setup for learning or testing.
 4. Consumer  
     Start a console. Or run it on another computer.  
     `client.sh`
-    `consumer.sh`
+    `consumer.sh default`
 5. Producer  
     Start another console. Or run it on another computer.  
     `client.sh`
-    `producer.sh`
+    `producer.sh default`
     Type anything and press enter. Then check your Consumer console.
 
 
