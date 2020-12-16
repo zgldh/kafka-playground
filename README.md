@@ -6,20 +6,22 @@ A single broker Kafka SSL setup for learning or testing.
 1. Prepare environment values  
    `cp .env.example .env`  
 
-    | Name                   | Note                                                                                  | Sample         |
-    | ---------------------- | ------------------------------------------------------------------------------------- | -------------- |
-    | KAFKA_INTERNET_HOST    | The host which clients connect to.                                                    | 192.168.0.123  |
-    | KAFKA_INTERNET_PORT    | Same above. Kafka will run SSL on it.                                                 | 9093           |
-    | KAFKA_SSL_KEY_PASSWORD | Your brokers and clients share the same password.                                     | YourPassword   |
-    | KAFKA_MANAGER_PORT     | The Kafka manager port.                                                               | 9000           |
-    | KAFKA_CREATE_TOPICS    | Please check https://github.com/wurstmeister/kafka-docker#automatically-create-topics | default:1:1    |
-    | KAFKA_CLUSTER_NAME     | Just a name.                                                                          | test-cluster   |
-    | CA_COMMON_NAME         | Who are you?                                                                          | your@email.com |
-    | CA_ORGANIZATION_UNIT   | Maybe your development team name?                                                     | Osvlabs        |
-    | CA_ORGANIZATION        | Your company or organization.                                                         | ShinetechZZ    |
-    | CA_LOCALITY            | Your city.                                                                            | Zhengzhou      |
-    | CA_STATE               | Your province.                                                                        | Henan          |
-    | CA_COUNTRY             | Your country code.                                                                    | CN             |
+    | Name                    | Note                                                                                  | Sample         |
+    | ----------------------- | ------------------------------------------------------------------------------------- | -------------- |
+    | KAFKA_INTERNET_HOST     | The host which clients connect to.                                                    | 192.168.0.123  |
+    | KAFKA_INTERNET_PORT     | Same above. Kafka will run SSL on it.                                                 | 9093           |
+    | KAFKA_SSL_KEY_PASSWORD  | Your brokers and clients share the same password.                                     | YourPassword   |
+    | KAFKA_MANAGER_PORT      | The Kafka manager port.                                                               | 9000           |
+    | KAFKA_CREATE_TOPICS     | Please check https://github.com/wurstmeister/kafka-docker#automatically-create-topics | default:1:1    |
+    | KAFKA_CLUSTER_NAME      | Just a name.                                                                          | test-cluster   |
+    | KAFKA_SECURITY_PROTOCOL | `PLAINTEXT` or `SSL`.                                                                     | SSL            |
+    | KAFKA_SSL_CLIENT_AUTH   | `none`, `required`, or `requested`.                                                         | required       |
+    | CA_COMMON_NAME          | Who are you?                                                                          | your@email.com |
+    | CA_ORGANIZATION_UNIT    | Maybe your development team name?                                                     | Osvlabs        |
+    | CA_ORGANIZATION         | Your company or organization.                                                         | ShinetechZZ    |
+    | CA_LOCALITY             | Your city.                                                                            | Zhengzhou      |
+    | CA_STATE                | Your province.                                                                        | Henan          |
+    | CA_COUNTRY              | Your country code.                                                                    | CN             |
 
 2. Genreate CA and Key pairs into Keystores.  
    Need `openssl` and `keytool`    
